@@ -1,6 +1,8 @@
 FROM python:3.12
 
 RUN adduser -uid 2001 app
+RUN mkdir /app
+RUN chown -R app:app /app
 
 # Update pip
 RUN pip install --upgrade pip
