@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# script to update the version number in the site
+# check if poetry is installed
+if ! command -v poetry &> /dev/null
+then
+    echo "<<poetry>> could not be found"
+    exit 1
+fi
+
+# goto script directory
+cd "$(dirname "$0")"
+
+# Ensure that the user has provided a valid argument
+case $1 in
+    patch)
+        ;;
+    minor)
+        ;;
+    major)
+        ;;
+    *)
+        echo "Usage: $0 [patch|minor|major]"
+        VERSION=$(poetry version -s)
+        echo "Current version: $VERSION"
+        exit 0
+        ;;
+esac
+
+# Ensure that the working directory is clean
+if [[ $(git status -s) ]]
+then
+    echo "Working directory is not clean! Please commit all changes before running this script."
+    exit 1
+fi
+
+# Ensure that the local branch is up to date with the remote branch
+git pull
+
+# increment poetry version
+poetry version $1
+
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+# get current version
+VERSION=$(poetry version -s)
+
+git commit -am v${VERSION}
+git tag -a -m v${VERSION} v${VERSION}
+git push --follow-tags
