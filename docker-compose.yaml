@@ -1,0 +1,6 @@
+version: "3"
+
+services:
+  docker_python_poetry:
+    build: .
+    image: simple2b/docker_python_poetry
