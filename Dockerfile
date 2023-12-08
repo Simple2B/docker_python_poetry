@@ -21,4 +21,3 @@ RUN pip install poetry
 COPY install.sh /usr/bin/install
 RUN chmod +x /usr/bin/install
 
-RUN mkdir /src
