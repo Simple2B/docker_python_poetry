@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-cd /app && poetry install --without dev
+chown -R app:app /app && cd /app && poetry install --without dev
