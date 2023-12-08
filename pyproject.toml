@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "docker_python_poetry"
-version = "0.0.7"
+version = "0.0.8"
 description = "Docker images python+poetry applications"
 authors = ["Mykola <nchernov@gmail.com>"]
 readme = "README.md"
